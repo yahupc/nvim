@@ -18,8 +18,8 @@ return {
     -- Define workspaces for Obsidian
     workspaces = {
       {
-        name = "GentlemanNotes", -- Name of the workspace
-        path = "/your/notes/path", -- Path to the notes directory
+        name = "yahupcNotes", -- Name of the workspace
+        path = "/home/yahupc/", -- Path to the notes directory
       },
     },
 

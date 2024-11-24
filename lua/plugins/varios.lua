@@ -18,6 +18,9 @@ local plugins = {
       },
     },
   },
+  {
+    "nvim-neotest/neotest-python",
+  },
   --  {
   --    "neovim/nvim-lspconfig",
   --   config = function()
