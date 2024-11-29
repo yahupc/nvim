@@ -158,4 +158,14 @@ return {
       opts.config.header = vim.split(logo, "\n") -- Set the header for the dashboard
     end,
   },
+  -- linea 80 caracteres
+  {
+    "lukas-reineke/virt-column.nvim",
+    config = function()
+      require("virt-column").setup({
+        char = "│", -- Caracter usado para la línea guía
+        virtcolumn = "80", -- Configura la columna 80 como guía
+      })
+    end,
+  },
 }

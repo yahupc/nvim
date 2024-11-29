@@ -119,14 +119,5 @@ return {
       -- Set the default color scheme
       colorscheme = "tokyonight-night",
     },
-    -- Linea divisoria para saber cuando sobrepaso 80 caracters
-    config = function()
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "python", "markdown" },
-        callback = function()
-          vim.opt_local.colorcolumn = "80"
-        end,
-      })
-    end,
   },
 }
