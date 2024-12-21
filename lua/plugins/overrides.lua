@@ -38,6 +38,8 @@ return {
             return require("lspconfig.util").root_pattern("angular.json", "project.json")(fname) -- Set root directory based on angular.json or project.json
           end,
         },
+        pyright = {},
+        ruff = {},
       },
     },
   },
