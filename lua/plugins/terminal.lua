@@ -39,4 +39,25 @@ return {
       end, { desc = "Toggle Horizontal Terminal" })
     end,
   },
+  {
+    "akinsho/toggleterm.nvim", -- Asegúrate de tener el plugin para terminales
+    config = function()
+      require("toggleterm").setup({
+        -- Configuración predeterminada
+        open_mapping = [[<leader>tx]],
+        direction = "float", -- Configuración flotante como ejemplo
+        float_opts = {
+          border = "curved",
+        },
+      })
+
+      -- Salir del modo terminal con <Esc><Esc>
+      vim.api.nvim_create_autocmd("TermOpen", {
+        pattern = "*",
+        callback = function()
+          vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>]], { buffer = true })
+        end,
+      })
+    end,
+  },
 }

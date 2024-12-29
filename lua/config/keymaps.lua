@@ -86,3 +86,20 @@ function SaveFile()
     vim.notify("Error: " .. err, vim.log.levels.ERROR) -- Show the error message if it fails
   end
 end
+-- Salir del modo terminal para entrar a modo normal
+return {
+  {
+    "nvim-treesitter/nvim-treesitter",
+    keys = {
+      -- Define <Esc><Esc> to leave terminal mode
+      {
+        "<Esc><Esc>",
+        function()
+          vim.cmd("stopinsert") -- Exit insert mode (terminal mode)
+        end,
+        mode = "t", -- Only apply in terminal mode
+        desc = "Exit terminal mode with <Esc><Esc>",
+      },
+    },
+  },
+}
