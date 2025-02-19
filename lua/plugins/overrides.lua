@@ -39,6 +39,7 @@ return {
           end,
         },
         pyright = {},
+        phpactor = {},
         ruff = {},
       },
     },

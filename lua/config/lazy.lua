@@ -82,3 +82,10 @@ require("lazy").setup({
     },
   },
 })
+-- Configuracion para detectar php usando laravel sail
+local function get_sail_container()
+  local handle = io.popen("docker ps --format '{{.Names}}' | grep 'sail-' | head -n 1")
+  local result = handle:read("*a")
+  handle:close()
+  return result:gsub("%s+", "") -- Limpiar espacios en blanco
+end
