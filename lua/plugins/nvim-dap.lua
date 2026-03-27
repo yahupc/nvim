@@ -54,7 +54,7 @@ return {
       {
         "<leader>da",
         function()
-          require("dap").continue({ before = get_args })
+          require("dap").continue()
         end,
         desc = "Run with Args",
       },

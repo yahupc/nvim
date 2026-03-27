@@ -1,5 +1,13 @@
 local lspconfig = require("lspconfig")
 
+-- Function to get Laravel Sail container name
+local function get_sail_container()
+  local handle = io.popen("docker ps --format '{{.Names}}' | grep 'sail-' | head -n 1")
+  local result = handle:read("*a")
+  handle:close()
+  return result:gsub("%s+", "") -- Clean whitespace
+end
+
 local sail_container = get_sail_container()
 if sail_container == "" then
   print("⚠️ No se encontró un contenedor de Sail en ejecución")

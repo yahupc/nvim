@@ -27,7 +27,7 @@ return {
     config = function()
       require("noice").setup({
         cmdline = {
-          view = "cmdline", -- Use the cmdline view for the command-line
+          view = "cmdline_popup", -- Use the cmdline_popup view to show command-line in the center as a box
         },
         presets = {
           bottom_search = true, -- Enable bottom search view
