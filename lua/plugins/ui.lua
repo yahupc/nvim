@@ -110,10 +110,10 @@ return {
   },
 
   -- Plugin: mini.nvim
-  -- URL: https://github.com/echasnovski/mini.nvim
+  -- URL: https://github.com/echasnovski/mini.nvim  cambio 2026
   -- Description: A collection of minimal, fast, and modular Lua plugins for Neovim.
   {
-    "echasnovski/mini.nvim",
+    "nvim-mini/mini.nvim",
     version = false, -- Use the latest version
     config = function()
       require("mini.animate").setup({
