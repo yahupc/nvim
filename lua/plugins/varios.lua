@@ -13,7 +13,6 @@ local plugins = {
         "black",
         "debugpy",
         "mypy",
-        --        "ruff-lsp",
         "ruff",
         "pyright",
         "phpactor",
@@ -21,15 +20,5 @@ local plugins = {
       },
     },
   },
-  {
-    "nvim-neotest/neotest-python",
-  },
-  --  {
-  --    "neovim/nvim-lspconfig",
-  --   config = function()
-  --      require("plugins.configs.lspconfig")
-  --      require("custom.configs.lspconfig")
-  --    end,
-  --  },
 }
 return plugins

@@ -66,7 +66,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy", -- Load this plugin on the 'VeryLazy' event
-    requires = { "nvim-tree/nvim-web-devicons", opt = true }, -- Optional dependency for icons
+    requires = { "nvim-treesitter/nvim-web-devicons", opt = true }, -- Optional dependency for icons
     opts = {
       options = {
         theme = "oldworld", -- Set the theme for lualine

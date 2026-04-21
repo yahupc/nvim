@@ -51,7 +51,7 @@ return {
     -- Plugin: mini.hipatterns
     -- URL: https://github.com/echasnovski/mini.hipatterns
     -- Description: Provides highlighter patterns for various text patterns.
-    "nvim-mini/mini.hipatterns", ha cambiado 2026
+    "nvim-mini/mini.hipatterns",
     event = "BufReadPre", -- Load the plugin before reading a buffer
     opts = {
       highlighters = {
