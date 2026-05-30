@@ -20,5 +20,14 @@ local plugins = {
       },
     },
   },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "python",
+        "php",
+      },
+    },
+  },
 }
 return plugins
