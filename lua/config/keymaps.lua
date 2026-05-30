@@ -88,17 +88,30 @@ function SaveFile()
 end
 
 -- Open images in Obsidian vault with gx, in  Dropbox/Obsidian  vault
+local utils = require("config.utils")
+
 vim.keymap.set("n", "gx", function()
   local line = vim.fn.getline(".")
-  local file = line:match("!%[%[(.-)%]%]")
+  local file = line:match("!%[%[([^%]]+)%]%]")
   if file then
-    local vault = vim.fn.expand("~/Dropbox/Obsidian")
-    -- Busca recursivamente en todo el vault
-    local result = vim.fn.systemlist("find " .. vault .. " -name " .. vim.fn.shellescape(file) .. " -type f")
-    if result and result[1] then
-      vim.fn.jobstart({ "imv", result[1] }, { detach = true })
+    local current_file = vim.fn.expand("%:p")
+    local vault = utils.find_vault_root(current_file)
+    if vault then
+      local result = vim.fn.systemlist({
+        "find",
+        vault,
+        "-name",
+        file,
+        "-type",
+        "f", -- lista en vez de string, maneja espacios
+      })
+      if result and result[1] then
+        vim.fn.jobstart({ "imv", result[1] }, { detach = true })
+      else
+        vim.notify("Imagen no encontrada: " .. file, vim.log.levels.WARN)
+      end
     else
-      vim.notify("Imagen no encontrada: " .. file, vim.log.levels.WARN)
+      vim.notify("Vault no encontrado", vim.log.levels.WARN)
     end
   else
     vim.ui.open(vim.fn.expand("<cfile>"))
