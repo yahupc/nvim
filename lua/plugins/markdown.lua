@@ -7,7 +7,7 @@ return {
     heading = {
       enabled = true,
       sign = true,
-      style = "full",
+      --style = "full",
       icons = { "① ", "② ", "③ ", "④ ", "⑤ ", "⑥ " },
       left_pad = 1,
     },
@@ -17,5 +17,14 @@ return {
       right_pad = 1,
       highlight = "render-markdownBullet",
     },
+    anti_conceal = {
+      enabled = true,
+    },
+    checkbox = {
+      enabled = true,
+      -- Puedes personalizar aquí cómo se ven tus casillas
+    },
+    html = { enabled = false },
+    latex = { enabled = false },
   },
 }

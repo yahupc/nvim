@@ -23,6 +23,7 @@ return {
           path = "/home/yahupc/", -- Path to the notes directory
         },
       },
+      ui = { enable = false },
 
       -- Completion settings
       completion = {
