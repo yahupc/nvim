@@ -106,7 +106,8 @@ vim.keymap.set("n", "gx", function()
         "f", -- lista en vez de string, maneja espacios
       })
       if result and result[1] then
-        vim.fn.jobstart({ "imv", result[1] }, { detach = true })
+        --        vim.fn.jobstart({ "imv", result[1] }, { detach = true }) -- archlinux
+        vim.fn.jobstart({ "wslview", result[1] }, { detach = true }) -- ubuntu
       else
         vim.notify("Imagen no encontrada: " .. file, vim.log.levels.WARN)
       end
