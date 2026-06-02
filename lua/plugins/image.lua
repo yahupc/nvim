@@ -1,111 +1,46 @@
--- https://github.com/3rd/image.nvim
---
--- Filename: ~/github/dotfiles-latest/neovim/nvim-lazyvim/lua/plugins/image-nvim.lua
--- ~/github/dotfiles-latest/neovim/nvim-lazyvim/lua/plugins/image-nvim.lua
-
--- For dependencies see
--- `~/github/dotfiles-latest/neovim/nvim-lazyvim/README.md`
---
--- -- Uncomment the following 2 lines if you use the local luarocks installation
--- -- Leave them commented to instead use `luarocks.nvim`
--- -- instead of luarocks.nvim
--- Notice that in the following 2 commands I'm using luaver
--- package.path = package.path
---   .. ";"
---   .. vim.fn.expand("$HOME")
---   .. "/.luaver/luarocks/3.11.0_5.1/share/lua/5.1/magick/?/init.lua"
--- package.path = package.path
---   .. ";"
---   .. vim.fn.expand("$HOME")
---   .. "/.luaver/luarocks/3.11.0_5.1/share/lua/5.1/magick/?.lua"
---
--- -- Here I'm not using luaver, but instead installed lua and luarocks directly through
--- -- homebrew
--- package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua"
--- package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua"
-
 return {
   {
-    -- luarocks.nvim is a Neovim plugin designed to streamline the installation
-    -- of luarocks packages directly within Neovim. It simplifies the process
-    -- of managing Lua dependencies, ensuring a hassle-free experience for
-    -- Neovim users.
-    -- https://github.com/vhyrro/luarocks.nvim
-    "vhyrro/luarocks.nvim",
-    -- this plugin needs to run before anything else
-    priority = 1001,
-    opts = {
-      rocks = { "magick" },
-    },
-  },
-  {
     "3rd/image.nvim",
-    dependencies = { "luarocks.nvim" },
-    config = function()
-      require("image").setup({
-        backend = "kitty",
-        kitty_method = "normal",
-        integrations = {
-          -- Notice these are the settings for markdown files
-          markdown = {
-            enabled = true,
-            clear_in_insert_mode = false,
-            -- Set this to false if you don't want to render images coming from
-            -- a URL
-            download_remote_images = true,
-            -- Change this if you would only like to render the image where the
-            -- cursor is at
-            -- I set this to true, because if the file has way too many images
-            -- it will be laggy and will take time for the initial load
-            only_render_image_at_cursor = true,
-            -- markdown extensions (ie. quarto) can go here
-            filetypes = { "markdown", "vimwiki" },
-          },
-          neorg = {
-            enabled = true,
-            clear_in_insert_mode = false,
-            download_remote_images = true,
-            only_render_image_at_cursor = false,
-            filetypes = { "norg" },
-          },
-          -- This is disabled by default
-          -- Detect and render images referenced in HTML files
-          -- Make sure you have an html treesitter parser installed
-          -- ~/github/dotfiles-latest/neovim/nvim-lazyvim/lua/plugins/treesitter.lua
-          html = {
-            enabled = true,
-          },
-          -- This is disabled by default
-          -- Detect and render images referenced in CSS files
-          -- Make sure you have a css treesitter parser installed
-          -- ~/github/dotfiles-latest/neovim/nvim-lazyvim/lua/plugins/treesitter.lua
-          css = {
-            enabled = true,
-          },
+    dependencies = {
+      {
+        "vhyrro/luarocks.nvim",
+        priority = 1000,
+        config = true,
+      },
+    },
+    opts = {
+      backend = "kitty",
+      integrations = {
+        markdown = {
+          enabled = true,
+          clear_in_insert_mode = false,
+          download_remote_images = true,
+          --only_render_image_at_cursor = false,  -- Si queremos renderizar la imagen en la terminal
+          only_render_image_at_cursor = true,
+          only_render_image_at_cursor_mode = "popup",
+          filetypes = { "markdown", "vimwiki" },
+          resolve_image_path = function(file_path, image_path, default_resolver)
+            local utils = require("config.utils")
+            local vault = utils.find_vault_root(file_path)
+            if vault then
+              local full = vault .. "/Assets/Attachments/" .. image_path
+              if vim.fn.filereadable(full) == 1 then
+                return full
+              end
+            end
+            local fallback = vim.fn.expand("~/Dropbox/Obsidian/Assets/Attachments/" .. image_path)
+            if vim.fn.filereadable(fallback) == 1 then
+              return fallback
+            end
+            return default_resolver(file_path, image_path)
+          end,
         },
-        max_width = nil,
-        max_height = nil,
-        max_width_window_percentage = nil,
-
-        -- This is what I changed to make my images look smaller, like a
-        -- thumbnail, the default value is 50
-        -- max_height_window_percentage = 20,
-        max_height_window_percentage = 40,
-
-        -- toggles images when windows are overlapped
-        window_overlap_clear_enabled = false,
-        window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-
-        -- auto show/hide images when the editor gains/looses focus
-        editor_only_render_when_focused = true,
-
-        -- auto show/hide images in the correct tmux window
-        -- In the tmux.conf add `set -g visual-activity off`
-        tmux_show_only_in_active_window = true,
-
-        -- render image files as images when opened
-        hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" },
-      })
-    end,
+      },
+      max_width = 100,
+      max_height = 12,
+      max_width_window_percentage = math.huge,
+      max_height_window_percentage = math.huge,
+      window_overlap_clear_enabled = true,
+    },
   },
 }
