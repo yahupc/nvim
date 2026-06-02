@@ -13,11 +13,11 @@ return {
       integrations = {
         markdown = {
           enabled = true,
-          clear_in_insert_mode = false,
+          clear_in_insert_mode = true,
           download_remote_images = true,
-          --only_render_image_at_cursor = false,  -- Si queremos renderizar la imagen en la terminal
+          --only_render_image_at_cursor = false, -- Si queremos renderizar la imagen en la terminal
           only_render_image_at_cursor = true,
-          only_render_image_at_cursor_mode = "popup",
+          only_render_image_at_cursor_mode = "inline",
           filetypes = { "markdown", "vimwiki" },
           resolve_image_path = function(file_path, image_path, default_resolver)
             local utils = require("config.utils")
