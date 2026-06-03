@@ -35,7 +35,7 @@ local plugins = {
       "nvim-neotest/nvim-nio",
     },
     config = function()
-      local path = python_venv or vim.fn.expand("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
+      local path = vim.fn.expand("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
       require("dap-python").setup(path)
     end,
   },

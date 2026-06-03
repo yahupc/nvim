@@ -4,6 +4,13 @@
 return {
   {
     "nvimtools/none-ls.nvim",
+    config = function(_, opts)
+      local null_ls = require("null-ls")
+      null_ls.setup(opts)
+
+      -- Remove markdownlint-cli2 added by LazyVim extras (nvim-lint handles it with --config)
+      require("null-ls.sources").deregister("markdownlint-cli2")
+    end,
     opts = function(_, opts)
       local null_ls = require("null-ls")
 

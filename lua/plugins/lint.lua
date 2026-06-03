@@ -5,7 +5,7 @@ return {
     opts = {
       linters = {
         ["markdownlint-cli2"] = {
-          args = { "--config", os.getenv("HOME") .. "/.config/nvim/.markdownlint.yaml", "--" },
+          prepend_args = { "--config", os.getenv("HOME") .. "/.config/nvim/.markdownlint.yaml" },
         },
       },
     },
