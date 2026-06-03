@@ -118,3 +118,12 @@ vim.keymap.set("n", "gx", function()
     vim.ui.open(vim.fn.expand("<cfile>"))
   end
 end, { desc = "Open wikilink or file" })
+
+-- Pra cambiar el idioma  (spell)
+vim.keymap.set("n", "<leader>sx", function()
+  local langs = { es = "en", en = "es" }
+  local current = vim.opt.spelllang:get()[1] or "en"
+  vim.opt.spelllang = langs[current] or "en"
+  vim.opt.spell = true
+  vim.notify("Spell: " .. vim.opt.spelllang:get()[1])
+end, { desc = "Toggle spell es/en" })
