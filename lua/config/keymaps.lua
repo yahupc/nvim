@@ -87,7 +87,7 @@ function SaveFile()
   end
 end
 
--- Open images in Obsidian vault with gx, in  Dropbox/Obsidian  vault
+-- Open wikilinks with system default app
 local utils = require("config.utils")
 
 vim.keymap.set("n", "gx", function()
@@ -106,8 +106,7 @@ vim.keymap.set("n", "gx", function()
         "f", -- lista en vez de string, maneja espacios
       })
       if result and result[1] then
-        local viewer = vim.fn.executable("imv") == 1 and "imv" or "xdg-open"
-        vim.fn.jobstart({ viewer, result[1] }, { detach = true })
+        vim.ui.open(result[1])
       else
         vim.notify("Imagen no encontrada: " .. file, vim.log.levels.WARN)
       end
