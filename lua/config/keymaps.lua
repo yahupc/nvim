@@ -92,7 +92,7 @@ local utils = require("config.utils")
 
 vim.keymap.set("n", "gx", function()
   local line = vim.fn.getline(".")
-  local file = line:match("!%[%[([^%]]+)%]%]")
+  local file = line:match("!?%[%[([^%]]+)%]%]")
   if file then
     local current_file = vim.fn.expand("%:p")
     local vault = utils.find_vault_root(current_file)
