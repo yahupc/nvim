@@ -1,0 +1,1 @@
+/home/yahupc/.config/omarchy/current/theme/neovim.lua
